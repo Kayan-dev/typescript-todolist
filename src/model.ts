@@ -1,6 +1,5 @@
 export type Item = {
-  id: number;
-  text: string;
-  tags: string[];
+  title: string;
   isDone: boolean;
+  tags: string[];
 };

@@ -3,18 +3,36 @@ import React from "react";
 import { Item } from "../model";
 
 type Props = {
-  // we should receive a todo item object
   item: Item;
-
-  // and a function that we don't have to give
-  //  anything, and doesn't return anything either
-  //  (it "just does" something)
-  toggleDone: () => void;
-
-  // ..and maybe we'll add some more stuff later,
-  //  this will be enough for now
+  onToggle: () => void;
 };
 
-export default function TodoItem(props: Props) {
-  return <p>later</p>;
+export default function TodoItem({ item, onToggle }: Props) {
+  return (
+    <div
+      onClick={() => {
+        // we want to make item.isDone reversed
+        console.log("yes this is clicked");
+        // setIsDone(!isDone); // !!
+        onToggle();
+      }}
+    >
+      [{item.isDone ? "x" : " "}] <strong>{item.title}</strong>{" "}
+      <span style={{ marginLeft: "10px" }}>
+        (
+        {item.tags.map((tag, i) => {
+          const isLastTag = item.tags.length - 1 === i;
+          return (
+            <span key={tag}>
+              <span style={{ margin: 3, textDecoration: "underline" }}>
+                {tag}
+              </span>
+              {isLastTag ? null : ", "}
+            </span>
+          );
+        })}
+        )
+      </span>
+    </div>
+  );
 }
